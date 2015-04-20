@@ -18,7 +18,6 @@
 
 var path2regex = require('path-to-regexp');
 
-
 module.exports = function reverend(route, obj) {
     var keys, path, routeRegex;
 
@@ -48,6 +47,11 @@ module.exports = function reverend(route, obj) {
             throw new RangeError('A value must be provided for: ' + key.name);
         }
 
+        // Check repeat.
+        if (!key.repeat && Array.isArray(value)) {
+            throw new RangeError('A value must not be an array: ' + key.name);
+        }
+
         // Pattern used in both unnamed (e.g., "/posts/(.*)") and custom match
         // parameters (e.g., "/posts/:id(\\d+)").
         regex = '\\(((?:\\\\.|[^)])*)\\)';
@@ -70,7 +74,9 @@ module.exports = function reverend(route, obj) {
             regex += '\\/?';
         }
 
-        value = encodeURIComponent(value);
+        value = Array.isArray(value) ? value : [value];
+        value = value.map(encodeURIComponent).join(key.delimiter);
+
         path = path.replace(new RegExp(regex), value);
     });
 
