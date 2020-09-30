@@ -1,6 +1,6 @@
 {
-  "name": "reverend",
-  "version": "0.3.0",
+  "name": "@noodoo/reverend",
+  "version": "0.4.0",
   "description": "Merge an express-style path string with data to create a valid path.",
   "main": "index.js",
   "directories": {
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/krakenjs/reverend.git"
+    "url": "https://github.com/noodoo/reverend.git"
   },
   "keywords": [
     "express",
@@ -38,5 +38,8 @@
   },
   "dependencies": {
     "path-to-regexp": "^1.0.1"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   }
 }
